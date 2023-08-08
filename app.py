@@ -5,8 +5,13 @@ import os
 
 app = Flask(__name__)
 
-# For now, we'll use a PostgreSQL connection string directly
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Kooringal25@localhost:5432/rugbydb'
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:  # We are running on Heroku or another production environment
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+else:  # We are running locally
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Kooringal25@localhost:5432/rugbydb'
+
 db = SQLAlchemy(app)
 
 @app.route('/')
