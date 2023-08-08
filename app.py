@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
+# This checks if the DATABASE_URL starts with "postgres://" and replaces it with "postgresql://"
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
 if DATABASE_URL:  # We are running on Heroku or another production environment
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 else:  # We are running locally
