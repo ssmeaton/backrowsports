@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Frontrow Sports</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+        <style>
+            .table-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+        </style>         
+    </head>
+    
+    <body>
+        <h1>Frontrow Sports</h1>
+
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">SRP 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="dropdown-sub">
+                        <a href="#">2023</a>
+                        <div class="dropdown-content-sub">
+                            <a href="{{ url_for('srp23_teamoverview') }}">Team Overview</a>
+                            <a href="{{ url_for('srp23_playeroverview') }}">Player Overview</a>
+                        </div>
+                    </div>
+                    <!-- Add more years like this
+                    <div class="dropdown-sub">
+                        <a href="#">2022</a>
+                        <div class="dropdown-content-sub">
+                            <a href="#">Team Overview</a>
+                            <a href="#">Player Overview</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        
+           <div class="dropdown">
+                <button class="dropbtn">PREM 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="dropdown-sub">
+                        <a href="#">2023</a>
+                        <div class="dropdown-content-sub">
+                            <a href="{{ url_for('prem23_teamoverview') }}">Team Overview</a>
+                            <a href="{{ url_for('prem23_playeroverview') }}">Player Overview</a>
+                        </div>
+                    </div>
+                    <!-- Add more years like this
+                    <div class="dropdown-sub">
+                        <a href="#">2022</a>
+                        <div class="dropdown-content-sub">
+                            <a href="#">Team Overview</a>
+                            <a href="#">Player Overview</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">URC 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="dropdown-sub">
+                        <a href="#">2023</a>
+                        <div class="dropdown-content-sub">
+                            <a href="{{ url_for('urc23_teamoverview') }}">Team Overview</a>
+                            <a href="{{ url_for('urc23_playeroverview') }}">Player Overview</a>
+                        </div>
+                    </div>
+                    <!-- Add more years like this
+                    <div class="dropdown-sub">
+                        <a href="#">2022</a>
+                        <div class="dropdown-content-sub">
+                            <a href="#">Team Overview</a>
+                            <a href="#">Player Overview</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <button class="dropbtn">T14 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="dropdown-sub">
+                        <a href="#">2023</a>
+                        <div class="dropdown-content-sub">
+                            <a href="{{ url_for('t1423_teamoverview') }}">Team Overview</a>
+                            <a href="{{ url_for('t1423_playeroverview') }}">Player Overview</a>
+                        </div>
+                    </div>
+                    <!-- Add more years like this
+                    <div class="dropdown-sub">
+                        <a href="#">2022</a>
+                        <div class="dropdown-content-sub">
+                            <a href="#">Team Overview</a>
+                            <a href="#">Player Overview</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div> 
+        </div>
+             
+        <div class="table-container">
+            <div class="static-table">
+                {{ avg_cb|safe }}
+            </div>
+            <div class="static-table">
+                {{ avg_db|safe }}
+            </div>
+            <div class="static-table">
+                {{ avg_runs|safe }}
+            </div>
+            <div class="static-table">
+                {{ avg_metres|safe }}
+            </div>
+            <div class="static-table">
+                {{ avg_offl|safe }}
+            </div>
+            <div class="static-table">
+                {{ avg_tkl|safe }}
+            </div>
+        </div>
+        
+        <div class="table-container">
+            {{ table|safe }}
+        </div>
+
+        <!-- jQuery, required for DataTables -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- DataTables JS -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+        <!-- Initialize DataTables -->
+        <script>
+            $(document).ready( function () {
+                $('.table').DataTable({
+                    "pageLength": 16,
+                    "lengthMenu": [[16, 25, 50, -1], [16, 25, 50, "All"]],
+                    "initComplete": function (settings, json) {  
+                        $(".table").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+                    },
+                });
+            });
+        </script>
+        
+    </body>
+</html>
