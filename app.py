@@ -50,7 +50,6 @@ def srp23_teamoverview():
 
     return render_template('SRP23_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/SRP23_playeroverview')
 def srp23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM SRP23_PlayerSeasonOverview', con=db.engine)
@@ -77,8 +76,6 @@ def srp23_playeroverview():
     tables['table'] = table
 
     return render_template('SRP23_PlayerSeasonOverview.html', **tables)
-
-
 
 @app.route('/PREM23_teamoverview')
 def prem23_teamoverview():
@@ -135,8 +132,6 @@ def prem23_playeroverview():
 
     return render_template('PREM23_PlayerSeasonOverview.html', **tables)
 
-
-
 @app.route('/URC23_teamoverview')
 def urc23_teamoverview():
     df = pd.read_sql_query('SELECT * FROM URC23_TeamSeasonOverview', con=db.engine)
@@ -191,8 +186,6 @@ def urc23_playeroverview():
     tables['table'] = table
 
     return render_template('URC23_PlayerSeasonOverview.html', **tables)
-
-
 
 @app.route('/T1423_teamoverview')
 def t1423_teamoverview():
@@ -249,8 +242,6 @@ def t1423_playeroverview():
 
     return render_template('T1423_PlayerSeasonOverview.html', **tables)
 
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
