@@ -16,9 +16,12 @@
     </head>
     
     <body>
-        <h1>Frontrow Sports</h1>
+        <a href="{{ url_for('home') }}" class="homepage-link">
+            <h1>Frontrow Sports</h1>
+        </a>
 
         <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbtn">HOME</a>
             <div class="dropdown">
                 <button class="dropbtn">SRP 
                     <i class="fa fa-caret-down"></i>
@@ -116,49 +119,25 @@
             </div> 
         </div>
 
-        <div class="table-container">
-            <div class="static-table">
-                {{ top_tries|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_defenders_beaten|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_clean_breaks|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_tackles|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_runs|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_metres|safe }}
-            </div>                   
-        </div>        
-
-        <div class="table-container">
-            {{ table|safe }}
+        <div class="content-container">
+            <p>
+                Listen up! Think you've got the inside source on rugby union stats? Spoiler: You're probably missing the best bits.
+            </p>
+            <p>
+                Here's the breakdown:
+                <ul>
+                    <li>Comprehensive Match Insights: Run meters, offloads, line-breaks – we've got the goods.</li>
+                    <li>Global League Coverage: From the rowdy action down south to the pint-raising drama up north, we've got the stats on every scrum, try, and questionable referee call around the globe.</li>
+                    <li>Historical Data: For those who fancy a trip down memory lane or just want to prove your mates Dad Leo wrong, our vast history vault is your treasure trove.</li>
+                </ul>
+            </p>
+            <p>
+                Picture this: You, beer in hand, dropping statistical dimes left and right, making your mates wonder if everything is okay at home. Our data doesn't just enhance your game day—it makes you the legend.
+            </p>
+            <p>
+                That's pretty much it. Comprehensive match data for rugby union. All in one place. 
+            </p>
         </div>
-
-        <!-- jQuery, required for DataTables -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-        <!-- DataTables JS -->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
-
-        <!-- Initialize DataTables -->
-        <script>
-            $(document).ready( function () {
-                $('.table').DataTable({
-                    "pageLength": 15,
-                    "lengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
-                    "initComplete": function (settings, json) {  
-                        $(".table").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-                    },
-                });
-            });
-        </script>
-        
+      
     </body>
 </html>

@@ -16,9 +16,12 @@
     </head>
     
     <body>
-        <h1>Frontrow Sports</h1>
+        <a href="{{ url_for('home') }}" class="homepage-link">
+            <h1>Frontrow Sports</h1>
+        </a>
 
         <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbtn">HOME</a>
             <div class="dropdown">
                 <button class="dropbtn">SRP 
                     <i class="fa fa-caret-down"></i>
