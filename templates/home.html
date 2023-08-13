@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Frontrow Sports</title>
+        <title>Backrow Sports</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
@@ -17,7 +17,7 @@
     
     <body>
         <a href="{{ url_for('home') }}" class="homepage-link">
-            <h1>Frontrow Sports</h1>
+            <h1>Backrow Sports</h1>
         </a>
 
         <div class="navbar">
@@ -132,12 +132,21 @@
                 </ul>
             </p>
             <p>
-                Picture this: You, beer in hand, dropping statistical dimes left and right, making your mates wonder if everything is okay at home. Our data doesn't just enhance your game day—it makes you the legend.
+                Picture this: You, beer in hand, dropping statistical dimes left and right, making your mates wonder if everything is okay at home. Our data doesn't just enhance your game day—it makes you the local legend.
             </p>
             <p>
                 That's pretty much it. Comprehensive match data for rugby union. All in one place. 
             </p>
         </div>
       
+        <div class="news-container">
+            <h2>Latest Rugby News from Twitter</h2>
+            <a class="twitter-timeline" data-width="1200" href="https://twitter.com/backrowsport?ref_src=twsrc%5Etfw">Tweets by backrowsport</a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        
     </body>
 </html>
+
+
+ 
