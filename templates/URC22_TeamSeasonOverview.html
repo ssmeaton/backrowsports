@@ -94,6 +94,13 @@
                 </button>
                 <div class="dropdown-content">
                     <div class="dropdown-sub">
+                        <a href="#">2024</a>
+                        <div class="dropdown-content-sub">
+                            <a href="{{ url_for('t1424_teamoverview') }}">2024 Team Overview</a>
+                            <a href="{{ url_for('t1424_playeroverview') }}">2024 Player Overview</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-sub">
                         <a href="#">2023</a>
                         <div class="dropdown-content-sub">
                             <a href="{{ url_for('t1423_teamoverview') }}">2023 Team Overview</a>
@@ -155,10 +162,5 @@
             });
         </script>
         
-        <div class="content-container">
-            <p>
-                Team data for Cardiff Rugby v Connacht Rugby, Edinburgh Rugby v Ospreys, & Munster Rugby v Stormers not available. These matches are included in matches_played count but do not contribute to measured metrics.
-            </p>
-
     </body>
 </html>

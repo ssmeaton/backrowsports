@@ -355,6 +355,62 @@ def urc22_playeroverview():
     return render_template('URC22_PlayerSeasonOverview.html', **tables)
 
 
+@app.route('/T1424_teamoverview')
+def t1424_teamoverview():
+    df = pd.read_sql_query('SELECT * FROM T1424_TeamSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'avg_cb': 'SELECT team, avg_cb FROM T1424_TeamSeasonOverview ORDER BY avg_cb DESC LIMIT 5',
+        'avg_db': 'SELECT team, avg_db FROM T1424_TeamSeasonOverview ORDER BY avg_db DESC LIMIT 5',
+        'avg_runs': 'SELECT team, avg_runs FROM T1424_TeamSeasonOverview ORDER BY avg_runs DESC LIMIT 5',
+        'avg_metres': 'SELECT team, avg_metres FROM T1424_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_offl': 'SELECT team, avg_offl FROM T1424_TeamSeasonOverview ORDER BY avg_offl DESC LIMIT 5',
+        'avg_tkl': 'SELECT team, avg_tkl FROM T1424_TeamSeasonOverview ORDER BY avg_tkl DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('T1424_TeamSeasonOverview.html', **tables)
+
+@app.route('/T1424_playeroverview')
+def t1424_playeroverview():
+    df = pd.read_sql_query('SELECT * FROM T1424_PlayerSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'top_tries': 'SELECT name, total_tries FROM T1424_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_defenders_beaten': 'SELECT name, total_db FROM T1424_PlayerSeasonOverview ORDER BY total_db DESC LIMIT 5',
+        'top_clean_breaks': 'SELECT name, total_cb FROM T1424_PlayerSeasonOverview ORDER BY total_cb DESC LIMIT 5',
+        'top_tackles': 'SELECT name, total_tkl FROM T1424_PlayerSeasonOverview ORDER BY total_tkl DESC LIMIT 5',
+        'top_runs': 'SELECT name, total_runs FROM T1424_PlayerSeasonOverview ORDER BY total_runs DESC LIMIT 5',
+        'top_metres': 'SELECT name, total_metres FROM T1424_PlayerSeasonOverview ORDER BY total_metres DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('T1424_PlayerSeasonOverview.html', **tables)
+
+
 @app.route('/T1423_teamoverview')
 def t1423_teamoverview():
     df = pd.read_sql_query('SELECT * FROM T1423_TeamSeasonOverview', con=db.engine)
