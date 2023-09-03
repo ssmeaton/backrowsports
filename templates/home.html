@@ -1,159 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G38M5H2JQE"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content-container">
+        <p>
+            Listen up! Think you've got the inside source on rugby union stats? Spoiler: You're probably missing the best bits.
+        </p>
+        <p>
+            Here's the breakdown:
+            <ul>
+                <li>Comprehensive Match Insights: Run meters, offloads, line-breaks – we've got the goods.</li>
+                <li>Global League Coverage: From the rowdy action down south to the pint-raising drama up north, we've got the stats on every scrum, try, and questionable referee call around the globe.</li>
+                <li>Historical Data: For those who fancy a trip down memory lane or just want to prove your mates Dad Leo wrong, our vast history vault is your treasure trove.</li>
+            </ul>
+        </p>
+        <p>
+            Picture this: You, beer in hand, dropping statistical dimes left and right, making your mates wonder if everything is okay at home. Our data doesn't just enhance your game day—it makes you the local legend.
+        </p>
+        <p>
+            That's pretty much it. Comprehensive match data for rugby union. All in one place.
+        </p>
+    </div>
 
-        gtag('config', 'G-G38M5H2JQE');
-        </script>
-
-        <title>Back Row Sports</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-        <style>
-            .table-container {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-                margin-bottom: 20px;
-            }
-        </style>    
-    </head>
-    
-    <body>
-        <a href="{{ url_for('home') }}" class="homepage-link">
-            <h1>Back Row Sports</h1>
-        </a>
-
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="navbtn">HOME</a>
-            <div class="dropdown">
-                <button class="dropbtn">SRP 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('srp23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('srp23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('srp22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('srp22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-           <div class="dropdown">
-                <button class="dropbtn">PREM 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('prem23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('prem23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('prem22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('prem22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">URC 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('urc23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('urc23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('urc22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('urc22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dropdown">
-                <button class="dropbtn">T14 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2024</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1424_teamoverview') }}">2024 Team Overview</a>
-                            <a href="{{ url_for('t1424_playeroverview') }}">2024 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1423_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('t1423_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1422_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('t1422_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>
-
-        <div class="content-container">
-            <p>
-                Listen up! Think you've got the inside source on rugby union stats? Spoiler: You're probably missing the best bits.
-            </p>
-            <p>
-                Here's the breakdown:
-                <ul>
-                    <li>Comprehensive Match Insights: Run meters, offloads, line-breaks – we've got the goods.</li>
-                    <li>Global League Coverage: From the rowdy action down south to the pint-raising drama up north, we've got the stats on every scrum, try, and questionable referee call around the globe.</li>
-                    <li>Historical Data: For those who fancy a trip down memory lane or just want to prove your mates Dad Leo wrong, our vast history vault is your treasure trove.</li>
-                </ul>
-            </p>
-            <p>
-                Picture this: You, beer in hand, dropping statistical dimes left and right, making your mates wonder if everything is okay at home. Our data doesn't just enhance your game day—it makes you the local legend.
-            </p>
-            <p>
-                That's pretty much it. Comprehensive match data for rugby union. All in one place. 
-            </p>
-        </div>
-      
-        <div class="news-container">
-            <h2>Latest Rugby News from Twitter</h2>
-            <a class="twitter-timeline" href="https://twitter.com/_backrowsports?ref_src=twsrc%5Etfw">Tweets by _backrowsports</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        
-    </body>
-</html>
-
+    <div class="news-container">
+        <h2>Latest Rugby News from Twitter</h2>
+        <a class="twitter-timeline" href="https://twitter.com/_backrowsports?ref_src=twsrc%5Etfw">Tweets by _backrowsports</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+{% endblock %}
