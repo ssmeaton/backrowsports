@@ -31,8 +31,14 @@ h1 {
 
 .news-container {
     margin: 0 auto;
-    max-width: 40%; /* You can adjust this as needed */
+    /* max-width: 80%; */ /* You can adjust this as needed */
     overflow-x: auto;
+}
+
+@media (min-width: 992px) {
+    .news-container {
+        max-width: 80%;
+    }
 }
 
 .static-table th, .static-table td {
