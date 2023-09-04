@@ -80,12 +80,29 @@ th:first-child, td:first-child {
         width: 100% !important;
         gap: 2rem;
     }
+
+    .table-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
 }
 
+@media (min-width: 768px) {
+    .table-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
+}
 
 .table-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1fr);
     gap: 10px;
     margin-bottom: 20px;
     overflow-x: auto;
