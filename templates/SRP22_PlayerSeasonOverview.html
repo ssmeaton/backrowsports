@@ -1,176 +1,80 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G38M5H2JQE"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-G38M5H2JQE');
-        </script>
-
-        <title>Back Row Sports</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-        <style>
-            .table-container {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-                margin-bottom: 20px;
-            }
-        </style>    
-    </head>
-    
-    <body>
-        <a href="{{ url_for('home') }}" class="homepage-link">
-            <h1>Back Row Sports</h1>
-        </a>
-
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="navbtn">HOME</a>
-            <div class="dropdown">
-                <button class="dropbtn">SRP 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('srp23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('srp23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('srp22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('srp22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-           <div class="dropdown">
-                <button class="dropbtn">PREM 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('prem23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('prem23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('prem22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('prem22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">URC 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('urc23_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('urc23_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('urc22_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('urc22_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dropdown">
-                <button class="dropbtn">T14 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-sub">
-                        <a href="#">2024</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1424_teamoverview') }}">2024 Team Overview</a>
-                            <a href="{{ url_for('t1424_playeroverview') }}">2024 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2023</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1423_teamoverview') }}">2023 Team Overview</a>
-                            <a href="{{ url_for('t1423_playeroverview') }}">2023 Player Overview</a>
-                        </div>
-                    </div>
-                    <div class="dropdown-sub">
-                        <a href="#">2022</a>
-                        <div class="dropdown-content-sub">
-                            <a href="{{ url_for('t1422_teamoverview') }}">2022 Team Overview</a>
-                            <a href="{{ url_for('t1422_playeroverview') }}">2022 Player Overview</a>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+{% extends 'base.html' %}
+{% block title %}Back Row Sports — SRP 2022 — Player Season Overview{% endblock %}
+{% block content %}
+    <div class="mb-5 d-flex flex-column gap-4 align-items-center">
+        <div>
+            <h2 class="m-0 display-1 fw-bolder">
+                SRP
+            </h2>
         </div>
-
-        <div class="table-container">
-            <div class="static-table">
-                {{ top_tries|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_defenders_beaten|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_clean_breaks|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_tackles|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_runs|safe }}
-            </div>
-            <div class="static-table">
-                {{ top_metres|safe }}
-            </div>                   
-        </div>        
-
-        <div class="table-container">
-            {{ table|safe }}
+        <div>
+            <select class="form-select"
+                    id="year-select"
+            >
+                <option value="{{ url_for('srp23_playeroverview') }}"
+                >2023
+                </option>
+                <option value="{{ url_for('srp22_playeroverview') }}"
+                        selected
+                >2022
+                </option>
+            </select>
         </div>
+        <div>
+            <select class="form-select"
+                    id="page-select"
+            >
+                <option value="{{ url_for('srp22_teamoverview') }}"
+                >Team Overview
+                </option>
+                <option value="{{ url_for('srp22_playeroverview') }}"
+                        selected
+                >Player Overview
+                </option>
+            </select>
+        </div>
+    </div>
 
-        <!-- jQuery, required for DataTables -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <div class="table-container">
+        <div class="static-table">
+            {{ top_tries|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_defenders_beaten|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_clean_breaks|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_tackles|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_runs|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_metres|safe }}
+        </div>
+    </div>
 
-        <!-- DataTables JS -->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <div class="table-container">
+        {{ table|safe }}
+    </div>
 
-        <!-- Initialize DataTables -->
-        <script>
-            $(document).ready( function () {
-                $('.table').DataTable({
-                    "pageLength": 15,
-                    "lengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
-                    "initComplete": function (settings, json) {  
-                        $(".table").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-                    },
-                });
+    {% include '_datatables_scripts.html' %}
+
+    <!-- Initialize DataTables -->
+    <script>
+        $(document).ready(function () {
+            $('.table:last').DataTable({
+                "pageLength": 15,
+                "lengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
+                "initComplete": function (settings, json) {
+                    $(".table:last").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             });
-        </script>
-        
-    </body>
-</html>
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+
+{% endblock %}
