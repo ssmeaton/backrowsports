@@ -18,9 +18,11 @@ else:  # We are running locally
 
 db = SQLAlchemy(app)
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 @app.route('/SRP23_teamoverview')
 def srp23_teamoverview():
@@ -50,6 +52,7 @@ def srp23_teamoverview():
 
     return render_template('SRP23_TeamSeasonOverview.html', **tables)
 
+
 @app.route('/SRP23_playeroverview')
 def srp23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM SRP23_PlayerSeasonOverview', con=db.engine)
@@ -76,6 +79,7 @@ def srp23_playeroverview():
     tables['table'] = table
 
     return render_template('SRP23_PlayerSeasonOverview.html', **tables)
+
 
 @app.route('/SRP22_teamoverview')
 def srp22_teamoverview():
@@ -104,6 +108,7 @@ def srp22_teamoverview():
     tables['table'] = table
 
     return render_template('SRP22_TeamSeasonOverview.html', **tables)
+
 
 @app.route('/SRP22_playeroverview')
 def srp22_playeroverview():
@@ -161,6 +166,7 @@ def prem23_teamoverview():
 
     return render_template('PREM23_TeamSeasonOverview.html', **tables)
 
+
 @app.route('/PREM23_playeroverview')
 def prem23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM PREM23_PlayerSeasonOverview', con=db.engine)
@@ -187,6 +193,7 @@ def prem23_playeroverview():
     tables['table'] = table
 
     return render_template('PREM23_PlayerSeasonOverview.html', **tables)
+
 
 @app.route('/PREM22_teamoverview')
 def prem22_teamoverview():
@@ -215,6 +222,7 @@ def prem22_teamoverview():
     tables['table'] = table
 
     return render_template('PREM22_TeamSeasonOverview.html', **tables)
+
 
 @app.route('/PREM22_playeroverview')
 def prem22_playeroverview():
@@ -272,6 +280,7 @@ def urc23_teamoverview():
 
     return render_template('URC23_TeamSeasonOverview.html', **tables)
 
+
 @app.route('/URC23_playeroverview')
 def urc23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM URC23_PlayerSeasonOverview', con=db.engine)
@@ -298,6 +307,7 @@ def urc23_playeroverview():
     tables['table'] = table
 
     return render_template('URC23_PlayerSeasonOverview.html', **tables)
+
 
 @app.route('/URC22_teamoverview')
 def urc22_teamoverview():
@@ -326,6 +336,7 @@ def urc22_teamoverview():
     tables['table'] = table
 
     return render_template('URC22_TeamSeasonOverview.html', **tables)
+
 
 @app.route('/URC22_playeroverview')
 def urc22_playeroverview():
@@ -383,6 +394,7 @@ def t1424_teamoverview():
 
     return render_template('T1424_TeamSeasonOverview.html', **tables)
 
+
 @app.route('/T1424_playeroverview')
 def t1424_playeroverview():
     df = pd.read_sql_query('SELECT * FROM T1424_PlayerSeasonOverview', con=db.engine)
@@ -439,6 +451,7 @@ def t1423_teamoverview():
 
     return render_template('T1423_TeamSeasonOverview.html', **tables)
 
+
 @app.route('/T1423_playeroverview')
 def t1423_playeroverview():
     df = pd.read_sql_query('SELECT * FROM T1423_PlayerSeasonOverview', con=db.engine)
@@ -494,6 +507,7 @@ def t1422_teamoverview():
     tables['table'] = table
 
     return render_template('T1422_TeamSeasonOverview.html', **tables)
+
 
 @app.route('/T1422_playeroverview')
 def t1422_playeroverview():

@@ -1,49 +1,40 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    /*font-family: Arial, sans-serif;*/
     background-color: #f0f0f0;
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "tnum", "zero";
+}
+
 .homepage-link {
-    text-decoration: none;  /* Removes underline */
-    color: inherit;         /* Inherits the color of the text inside, i.e., the h1 */
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits the color of the text inside, i.e., the h1 */
 }
 
 h1 {
-    text-align: center;
-    padding: 14px;
-    margin:10px 0px;
     background-color: #333;
     color: #fff;
-}
-
-div {
-    margin: 0px;
-}
-
-.table-container {
-    margin: 0 auto;
-    max-width: 75%; /* You can adjust this as needed */
-    overflow-x: auto;
 }
 
 .content-container {
     margin: 0 auto;
     max-width: 75%; /* You can adjust this as needed */
     overflow-x: auto;
+    margin-bottom: 2rem;
 }
 
 .news-container {
     margin: 0 auto;
-    max-width: 40%; /* You can adjust this as needed */
+    /* max-width: 80%; */ /* You can adjust this as needed */
     overflow-x: auto;
 }
 
-.static-table {
-    width: 50%; /* Adjust as necessary */
-    margin: 0 auto; /* Center the table */
-    /* Add other styling rules as necessary */
+@media (min-width: 992px) {
+    .news-container {
+        max-width: 80%;
+    }
 }
 
 .static-table th, .static-table td {
@@ -51,8 +42,7 @@ div {
 }
 
 table {
-    position: relative;
-    width: 100%;
+    /* width: 100%; */
     border-collapse: collapse;
 }
 
@@ -65,8 +55,8 @@ th, td {
 }
 
 th:first-child, td:first-child {
-    position: sticky;
-    left: 0;
+    /*position: sticky;*/
+    /*left: 0;*/
     background: #FFF;
     z-index: 1;
 }
@@ -75,108 +65,34 @@ th:first-child, td:first-child {
     font-size: 12px;
 }
 
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-    margin: 10px;
-  }
-  
-  .navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 8px 8px;
-    text-decoration: none;
-  }
-  
-  .navbar a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .dropdown {
-    float: left;
-    overflow: hidden;
+#top-ad-space {
+    min-height: 100px;
 }
 
-.navbtn {
-    font-size: 14px; 
-    color: white;
-    padding: 8px 8px;
-    background-color: inherit;
-    font-family: inherit;
-    text-decoration: none; /* To remove the underline typically present on anchor links */
-    display: inline-block; /* To allow padding to affect the element */
+#side-ad-space {
+
 }
 
-.dropdown .dropbtn {
-    cursor: pointer;
-    font-size: 14px;  
-    border: none;
-    outline: none;
-    color: white;
-    padding: 8px 8px;
-    background-color: inherit;
-    font-family: inherit; /* Necessary for vertical align on mobile phones */
-    margin: 0; /* Necessary for vertical align on mobile phones */
+
+.table-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+@media (min-width: 992px) {
+    .container-with-side-ad {
+        display: grid;
+        grid-template-columns: 80% 1fr;
+        width: 100% !important;
+        gap: 2rem;
+    }
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    width: auto;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
-    z-index: 1;
+@media (min-width: 768px) {
+    .table-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
-
-.dropdown-content a {
-    color: black;
-    padding: 8px 4px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    font-size: 12px;
-    white-space: nowrap;
-}
-
-.dropdown-sub {
-    position: relative;
-}
-
-.dropdown-content-sub {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-}
-
-.dropdown-content-sub a {
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 8px 4px;
-    white-space: nowrap;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
-    font-size: 12px;
-}
-
-.dropdown-sub:hover .dropdown-content-sub {
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
