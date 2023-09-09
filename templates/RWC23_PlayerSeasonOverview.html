@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Back Row Sports — RWC 2023 — Player Season Overview{% endblock %}
+{% block content %}
+    <div class="mb-5 d-flex flex-column gap-4 align-items-center">
+        <div>
+            <h2 class="m-0 display-3 fw-bolder text-center">
+                Rugby World Cup
+            </h2>
+        </div>
+        <div>
+            <select class="form-select"
+                    id="year-select"
+            >
+                <option value="{{ url_for('rwc23_playeroverview') }}"
+                        selected
+                >2023
+                </option>
+
+            </select>
+        </div>
+        <div>
+            <select class="form-select"
+                    id="page-select"
+            >
+                <option value="{{ url_for('rwc23_teamoverview') }}"
+                >Team Overview
+                </option>
+                <option value="{{ url_for('rwc23_playeroverview') }}"
+                        selected
+                >Player Overview
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="static-table">
+            {{ top_tries|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_defenders_beaten|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_clean_breaks|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_tackles|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_runs|safe }}
+        </div>
+        <div class="static-table">
+            {{ top_metres|safe }}
+        </div>
+    </div>
+
+    <div class="table-container">
+        {{ table|safe }}
+    </div>
+
+    {% include '_datatables_scripts.html' %}
+
+    <!-- Initialize DataTables -->
+    <script>
+        $(document).ready(function () {
+            $('.table:last').DataTable({
+                "pageLength": 15,
+                "lengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
+                "initComplete": function (settings, json) {
+                    $(".table:last").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+
+{% endblock %}

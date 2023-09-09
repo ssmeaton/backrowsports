@@ -537,6 +537,63 @@ def t1422_playeroverview():
     return render_template('T1422_PlayerSeasonOverview.html', **tables)
 
 
+@app.route('/RWC23_teamoverview')
+def rwc23_teamoverview():
+    df = pd.read_sql_query('SELECT * FROM RWC23_TeamSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'avg_cb': 'SELECT team, avg_cb FROM RWC23_TeamSeasonOverview ORDER BY avg_cb DESC LIMIT 5',
+        'avg_db': 'SELECT team, avg_db FROM RWC23_TeamSeasonOverview ORDER BY avg_db DESC LIMIT 5',
+        'avg_runs': 'SELECT team, avg_runs FROM RWC23_TeamSeasonOverview ORDER BY avg_runs DESC LIMIT 5',
+        'avg_metres': 'SELECT team, avg_metres FROM RWC23_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_offl': 'SELECT team, avg_offl FROM RWC23_TeamSeasonOverview ORDER BY avg_offl DESC LIMIT 5',
+        'avg_tkl': 'SELECT team, avg_tkl FROM RWC23_TeamSeasonOverview ORDER BY avg_tkl DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('RWC23_TeamSeasonOverview.html', **tables)
+
+
+@app.route('/RWC23_playeroverview')
+def rwc23_playeroverview():
+    df = pd.read_sql_query('SELECT * FROM RWC23_PlayerSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'top_tries': 'SELECT name, total_tries FROM RWC23_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_defenders_beaten': 'SELECT name, total_db FROM RWC23_PlayerSeasonOverview ORDER BY total_db DESC LIMIT 5',
+        'top_clean_breaks': 'SELECT name, total_cb FROM RWC23_PlayerSeasonOverview ORDER BY total_cb DESC LIMIT 5',
+        'top_tackles': 'SELECT name, total_tkl FROM RWC23_PlayerSeasonOverview ORDER BY total_tkl DESC LIMIT 5',
+        'top_runs': 'SELECT name, total_runs FROM RWC23_PlayerSeasonOverview ORDER BY total_runs DESC LIMIT 5',
+        'top_metres': 'SELECT name, total_metres FROM RWC23_PlayerSeasonOverview ORDER BY total_metres DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('RWC23_PlayerSeasonOverview.html', **tables)
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
