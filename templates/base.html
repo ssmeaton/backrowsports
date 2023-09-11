@@ -38,16 +38,15 @@
         {% include '_navbar.html' %}
     </div>
     <div>
-        <div id="top-ad-space"
-             class="border rounded p-2"
-        ></div>
+      <div id="top-ad-space" class="border rounded p-2">
+            {% include '_adsense_horizontal.html' %}
+            </div>
         <div class="container-with-side-ad mt-4">
             <div class="w-100">
                 {% block content %}{% endblock %}
             </div>
-            <div id="side-ad-space"
-                 class="d-none d-lg-block border rounded p-2"
-            >
+            <div id="side-ad-space" class="d-none d-lg-block border rounded p-2">
+                  {% include '_adsense_vertical.html' %}
             </div>
         </div>
     </div>

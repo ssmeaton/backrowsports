@@ -20,7 +20,7 @@ h1 {
 
 .content-container {
     margin: 0 auto;
-    max-width: 75%; /* You can adjust this as needed */
+    max-width: 100%; /* You can adjust this as needed */
     overflow-x: auto;
     margin-bottom: 2rem;
 }
