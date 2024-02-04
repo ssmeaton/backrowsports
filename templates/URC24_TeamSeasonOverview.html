@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Back Row Sports — URC 2022 — Team Season Overview{% endblock %}
+{% block title %}Back Row Sports — URC 2024 — Team Season Overview{% endblock %}
 {% block content %}
     <div class="mb-5 d-flex flex-column gap-4 align-items-center">
         <div>
@@ -12,13 +12,13 @@
                     id="year-select"
             >
                 <option value="{{ url_for('urc24_teamoverview') }}"
+                        selected
                 >2024
                 </option>
                 <option value="{{ url_for('urc23_teamoverview') }}"
                 >2023
                 </option>
                 <option value="{{ url_for('urc22_teamoverview') }}"
-                        selected
                 >2022
                 </option>
             </select>
@@ -27,16 +27,17 @@
             <select class="form-select"
                     id="page-select"
             >
-                <option value="{{ url_for('urc22_teamoverview') }}"
+                <option value="{{ url_for('urc24_teamoverview') }}"
                         selected
                 >Team Overview
                 </option>
-                <option value="{{ url_for('urc22_playeroverview') }}"
+                <option value="{{ url_for('urc24_playeroverview') }}"
                 >Player Overview
                 </option>
             </select>
         </div>
     </div>
+
     <div class="table-container">
         <div class="static-table">
             {{ avg_cb|safe }}
@@ -76,5 +77,6 @@
             });
         });
     </script>
+
     <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 {% endblock %}

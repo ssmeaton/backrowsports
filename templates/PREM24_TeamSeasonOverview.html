@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
-{% block title %}Back Row Sports — URC 2022 — Team Season Overview{% endblock %}
+{% block title %}Back Row Sports — PREM 2024 — Team Season Overview{% endblock %}
 {% block content %}
     <div class="mb-5 d-flex flex-column gap-4 align-items-center">
         <div>
             <h2 class="m-0 display-3 fw-bolder text-center">
-                United Rugby Championship
+                Premiership Rugby
             </h2>
         </div>
         <div>
             <select class="form-select"
                     id="year-select"
             >
-                <option value="{{ url_for('urc24_teamoverview') }}"
+                <option value="{{ url_for('prem24_teamoverview') }}"
+                        selected
                 >2024
                 </option>
-                <option value="{{ url_for('urc23_teamoverview') }}"
+                <option value="{{ url_for('prem23_teamoverview') }}"
                 >2023
                 </option>
-                <option value="{{ url_for('urc22_teamoverview') }}"
-                        selected
+                <option value="{{ url_for('prem22_teamoverview') }}"
                 >2022
                 </option>
             </select>
@@ -27,16 +27,17 @@
             <select class="form-select"
                     id="page-select"
             >
-                <option value="{{ url_for('urc22_teamoverview') }}"
+                <option value="{{ url_for('prem24_teamoverview') }}"
                         selected
                 >Team Overview
                 </option>
-                <option value="{{ url_for('urc22_playeroverview') }}"
+                <option value="{{ url_for('prem24_playeroverview') }}"
                 >Player Overview
                 </option>
             </select>
         </div>
     </div>
+
     <div class="table-container">
         <div class="static-table">
             {{ avg_cb|safe }}
@@ -68,13 +69,14 @@
     <script>
         $(document).ready(function () {
             $('.table:last').DataTable({
-                "pageLength": 16,
-                "lengthMenu": [[16, 25, 50, -1], [16, 25, 50, "All"]],
+                "pageLength": 13,
+                "lengthMenu": [[13, 25, 50, -1], [13, 25, 50, "All"]],
                 "initComplete": function (settings, json) {
                     $(".table:last").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             });
         });
     </script>
+
     <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 {% endblock %}

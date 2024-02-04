@@ -11,6 +11,9 @@
             <select class="form-select"
                     id="year-select"
             >
+                <option value="{{ url_for('urc24_teamoverview') }}"
+                >2024
+                </option>
                 <option value="{{ url_for('urc23_teamoverview') }}"
                         selected
                 >2023
@@ -34,6 +37,7 @@
             </select>
         </div>
     </div>
+    
     <div class="table-container">
         <div class="static-table">
             {{ avg_cb|safe }}
