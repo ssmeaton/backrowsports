@@ -52,7 +52,6 @@ def srp23_teamoverview():
 
     return render_template('SRP23_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/SRP23_playeroverview')
 def srp23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM SRP23_PlayerSeasonOverview', con=db.engine)
@@ -79,7 +78,6 @@ def srp23_playeroverview():
     tables['table'] = table
 
     return render_template('SRP23_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/SRP22_teamoverview')
 def srp22_teamoverview():
@@ -109,7 +107,6 @@ def srp22_teamoverview():
 
     return render_template('SRP22_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/SRP22_playeroverview')
 def srp22_playeroverview():
     df = pd.read_sql_query('SELECT * FROM SRP22_PlayerSeasonOverview', con=db.engine)
@@ -137,6 +134,62 @@ def srp22_playeroverview():
 
     return render_template('SRP22_PlayerSeasonOverview.html', **tables)
 
+
+
+@app.route('/PREM24_teamoverview')
+def prem24_teamoverview():
+    df = pd.read_sql_query('SELECT * FROM PREM24_TeamSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'avg_cb': 'SELECT team, avg_cb FROM PREM24_TeamSeasonOverview ORDER BY avg_cb DESC LIMIT 5',
+        'avg_db': 'SELECT team, avg_db FROM PREM24_TeamSeasonOverview ORDER BY avg_db DESC LIMIT 5',
+        'avg_runs': 'SELECT team, avg_runs FROM PREM24_TeamSeasonOverview ORDER BY avg_runs DESC LIMIT 5',
+        'avg_metres': 'SELECT team, avg_metres FROM PREM24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_offl': 'SELECT team, avg_offl FROM PREM24_TeamSeasonOverview ORDER BY avg_offl DESC LIMIT 5',
+        'avg_tkl': 'SELECT team, avg_tkl FROM PREM24_TeamSeasonOverview ORDER BY avg_tkl DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('PREM24_TeamSeasonOverview.html', **tables)
+
+@app.route('/PREM24_playeroverview')
+def prem24_playeroverview():
+    df = pd.read_sql_query('SELECT * FROM PREM24_PlayerSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'top_tries': 'SELECT name, total_tries FROM PREM24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_defenders_beaten': 'SELECT name, total_db FROM PREM24_PlayerSeasonOverview ORDER BY total_db DESC LIMIT 5',
+        'top_clean_breaks': 'SELECT name, total_cb FROM PREM24_PlayerSeasonOverview ORDER BY total_cb DESC LIMIT 5',
+        'top_tackles': 'SELECT name, total_tkl FROM PREM24_PlayerSeasonOverview ORDER BY total_tkl DESC LIMIT 5',
+        'top_runs': 'SELECT name, total_runs FROM PREM24_PlayerSeasonOverview ORDER BY total_runs DESC LIMIT 5',
+        'top_metres': 'SELECT name, total_metres FROM PREM24_PlayerSeasonOverview ORDER BY total_metres DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('PREM24_PlayerSeasonOverview.html', **tables)
 
 @app.route('/PREM23_teamoverview')
 def prem23_teamoverview():
@@ -166,7 +219,6 @@ def prem23_teamoverview():
 
     return render_template('PREM23_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/PREM23_playeroverview')
 def prem23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM PREM23_PlayerSeasonOverview', con=db.engine)
@@ -193,7 +245,6 @@ def prem23_playeroverview():
     tables['table'] = table
 
     return render_template('PREM23_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/PREM22_teamoverview')
 def prem22_teamoverview():
@@ -223,7 +274,6 @@ def prem22_teamoverview():
 
     return render_template('PREM22_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/PREM22_playeroverview')
 def prem22_playeroverview():
     df = pd.read_sql_query('SELECT * FROM PREM22_PlayerSeasonOverview', con=db.engine)
@@ -251,6 +301,63 @@ def prem22_playeroverview():
 
     return render_template('PREM22_PlayerSeasonOverview.html', **tables)
 
+
+
+
+@app.route('/URC24_teamoverview')
+def urc24_teamoverview():
+    df = pd.read_sql_query('SELECT * FROM URC24_TeamSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'avg_cb': 'SELECT team, avg_cb FROM URC24_TeamSeasonOverview ORDER BY avg_cb DESC LIMIT 5',
+        'avg_db': 'SELECT team, avg_db FROM URC24_TeamSeasonOverview ORDER BY avg_db DESC LIMIT 5',
+        'avg_runs': 'SELECT team, avg_runs FROM URC24_TeamSeasonOverview ORDER BY avg_runs DESC LIMIT 5',
+        'avg_metres': 'SELECT team, avg_metres FROM URC24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_offl': 'SELECT team, avg_offl FROM URC24_TeamSeasonOverview ORDER BY avg_offl DESC LIMIT 5',
+        'avg_tkl': 'SELECT team, avg_tkl FROM URC24_TeamSeasonOverview ORDER BY avg_tkl DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('URC24_TeamSeasonOverview.html', **tables)
+
+@app.route('/URC24_playeroverview')
+def urc24_playeroverview():
+    df = pd.read_sql_query('SELECT * FROM URC24_PlayerSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'top_tries': 'SELECT name, total_tries FROM URC24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_defenders_beaten': 'SELECT name, total_db FROM URC24_PlayerSeasonOverview ORDER BY total_db DESC LIMIT 5',
+        'top_clean_breaks': 'SELECT name, total_cb FROM URC24_PlayerSeasonOverview ORDER BY total_cb DESC LIMIT 5',
+        'top_tackles': 'SELECT name, total_tkl FROM URC24_PlayerSeasonOverview ORDER BY total_tkl DESC LIMIT 5',
+        'top_runs': 'SELECT name, total_runs FROM URC24_PlayerSeasonOverview ORDER BY total_runs DESC LIMIT 5',
+        'top_metres': 'SELECT name, total_metres FROM URC24_PlayerSeasonOverview ORDER BY total_metres DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('URC24_PlayerSeasonOverview.html', **tables)
 
 @app.route('/URC23_teamoverview')
 def urc23_teamoverview():
@@ -280,7 +387,6 @@ def urc23_teamoverview():
 
     return render_template('URC23_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/URC23_playeroverview')
 def urc23_playeroverview():
     df = pd.read_sql_query('SELECT * FROM URC23_PlayerSeasonOverview', con=db.engine)
@@ -307,7 +413,6 @@ def urc23_playeroverview():
     tables['table'] = table
 
     return render_template('URC23_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/URC22_teamoverview')
 def urc22_teamoverview():
@@ -337,7 +442,6 @@ def urc22_teamoverview():
 
     return render_template('URC22_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/URC22_playeroverview')
 def urc22_playeroverview():
     df = pd.read_sql_query('SELECT * FROM URC22_PlayerSeasonOverview', con=db.engine)
@@ -364,7 +468,6 @@ def urc22_playeroverview():
     tables['table'] = table
 
     return render_template('URC22_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/T1424_teamoverview')
 def t1424_teamoverview():
@@ -394,7 +497,6 @@ def t1424_teamoverview():
 
     return render_template('T1424_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/T1424_playeroverview')
 def t1424_playeroverview():
     df = pd.read_sql_query('SELECT * FROM T1424_PlayerSeasonOverview', con=db.engine)
@@ -421,7 +523,6 @@ def t1424_playeroverview():
     tables['table'] = table
 
     return render_template('T1424_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/T1423_teamoverview')
 def t1423_teamoverview():
@@ -451,7 +552,6 @@ def t1423_teamoverview():
 
     return render_template('T1423_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/T1423_playeroverview')
 def t1423_playeroverview():
     df = pd.read_sql_query('SELECT * FROM T1423_PlayerSeasonOverview', con=db.engine)
@@ -478,7 +578,6 @@ def t1423_playeroverview():
     tables['table'] = table
 
     return render_template('T1423_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/T1422_teamoverview')
 def t1422_teamoverview():
@@ -508,7 +607,6 @@ def t1422_teamoverview():
 
     return render_template('T1422_TeamSeasonOverview.html', **tables)
 
-
 @app.route('/T1422_playeroverview')
 def t1422_playeroverview():
     df = pd.read_sql_query('SELECT * FROM T1422_PlayerSeasonOverview', con=db.engine)
@@ -535,7 +633,6 @@ def t1422_playeroverview():
     tables['table'] = table
 
     return render_template('T1422_PlayerSeasonOverview.html', **tables)
-
 
 @app.route('/RWC23_teamoverview')
 def rwc23_teamoverview():
@@ -564,7 +661,6 @@ def rwc23_teamoverview():
     tables['table'] = table
 
     return render_template('RWC23_TeamSeasonOverview.html', **tables)
-
 
 @app.route('/RWC23_playeroverview')
 def rwc23_playeroverview():
