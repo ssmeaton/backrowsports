@@ -21,7 +21,34 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    # Function to create static tables
+    def create_table(query, table_class='static-table table-striped'):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes=table_class, index=False)
+
+    # Queries for team overview tables
+    team_queries = {
+        'avg_metres_srp': 'SELECT team, avg_metres FROM SRP23_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_metres_prem': 'SELECT team, avg_metres FROM PREM24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_metres_urc': 'SELECT team, avg_metres FROM URC24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_metres_t14': 'SELECT team, avg_metres FROM T1424_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+    }
+    team_tables = {name: create_table(query) for name, query in team_queries.items()}
+
+    # Queries for player overview tables
+    player_queries = {
+        'top_tries_srp': 'SELECT name, total_tries FROM SRP23_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_tries_prem': 'SELECT name, total_tries FROM PREM24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_tries_urc': 'SELECT name, total_tries FROM URC24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_tries_t14': 'SELECT name, total_tries FROM T1424_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+    }
+    player_tables = {name: create_table(query) for name, query in player_queries.items()}
+
+    # Combine all tables into a single dictionary to pass to the template
+    all_tables = {**team_tables, **player_tables}
+
+    return render_template('home.html', **all_tables)
 
 
 @app.route('/SRP23_teamoverview')
