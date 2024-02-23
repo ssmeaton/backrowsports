@@ -29,7 +29,7 @@ def home():
 
     # Queries for team overview tables
     team_queries = {
-        'avg_metres_srp': 'SELECT team, avg_metres FROM SRP23_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_metres_srp': 'SELECT team, avg_metres FROM SRP24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
         'avg_metres_prem': 'SELECT team, avg_metres FROM PREM24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
         'avg_metres_urc': 'SELECT team, avg_metres FROM URC24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
         'avg_metres_t14': 'SELECT team, avg_metres FROM T1424_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
@@ -38,7 +38,7 @@ def home():
 
     # Queries for player overview tables
     player_queries = {
-        'top_tries_srp': 'SELECT name, total_tries FROM SRP23_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_tries_srp': 'SELECT name, total_tries FROM SRP24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
         'top_tries_prem': 'SELECT name, total_tries FROM PREM24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
         'top_tries_urc': 'SELECT name, total_tries FROM URC24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
         'top_tries_t14': 'SELECT name, total_tries FROM T1424_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
@@ -49,6 +49,61 @@ def home():
     all_tables = {**team_tables, **player_tables}
 
     return render_template('home.html', **all_tables)
+
+@app.route('/SRP24_teamoverview')
+def srp24_teamoverview():
+    df = pd.read_sql_query('SELECT * FROM SRP24_TeamSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        df = df.round(2)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'avg_cb': 'SELECT team, avg_cb FROM SRP24_TeamSeasonOverview ORDER BY avg_cb DESC LIMIT 5',
+        'avg_db': 'SELECT team, avg_db FROM SRP24_TeamSeasonOverview ORDER BY avg_db DESC LIMIT 5',
+        'avg_runs': 'SELECT team, avg_runs FROM SRP24_TeamSeasonOverview ORDER BY avg_runs DESC LIMIT 5',
+        'avg_metres': 'SELECT team, avg_metres FROM SRP24_TeamSeasonOverview ORDER BY avg_metres DESC LIMIT 5',
+        'avg_offl': 'SELECT team, avg_offl FROM SRP24_TeamSeasonOverview ORDER BY avg_offl DESC LIMIT 5',
+        'avg_tkl': 'SELECT team, avg_tkl FROM SRP24_TeamSeasonOverview ORDER BY avg_tkl DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('SRP24_TeamSeasonOverview.html', **tables)
+
+@app.route('/SRP24_playeroverview')
+def srp24_playeroverview():
+    df = pd.read_sql_query('SELECT * FROM SRP24_PlayerSeasonOverview', con=db.engine)
+    df = df.round(2)
+    table = df.to_html(classes='table table-striped', index=False)
+
+    # Function to create static tables
+    def create_table(query):
+        df = pd.read_sql_query(query, con=db.engine)
+        return df.to_html(classes='static-table table-striped', index=False)
+
+    # Generate static tables
+    queries = {
+        'top_tries': 'SELECT name, total_tries FROM SRP24_PlayerSeasonOverview ORDER BY total_tries DESC LIMIT 5',
+        'top_defenders_beaten': 'SELECT name, total_db FROM SRP24_PlayerSeasonOverview ORDER BY total_db DESC LIMIT 5',
+        'top_clean_breaks': 'SELECT name, total_cb FROM SRP24_PlayerSeasonOverview ORDER BY total_cb DESC LIMIT 5',
+        'top_tackles': 'SELECT name, total_tkl FROM SRP24_PlayerSeasonOverview ORDER BY total_tkl DESC LIMIT 5',
+        'top_runs': 'SELECT name, total_runs FROM SRP24_PlayerSeasonOverview ORDER BY total_runs DESC LIMIT 5',
+        'top_metres': 'SELECT name, total_metres FROM SRP24_PlayerSeasonOverview ORDER BY total_metres DESC LIMIT 5',
+    }
+    tables = {name: create_table(query) for name, query in queries.items()}
+
+    # Add the main dynamic table to the tables dictionary
+    tables['table'] = table
+
+    return render_template('SRP24_PlayerSeasonOverview.html', **tables)
 
 
 @app.route('/SRP23_teamoverview')

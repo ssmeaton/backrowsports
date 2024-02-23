@@ -12,10 +12,10 @@
                     id="year-select"
             >
                 <option value="{{ url_for('srp24_playeroverview') }}"
+                        selected
                 >2024
                 </option>
                 <option value="{{ url_for('srp23_playeroverview') }}"
-                        selected
                 >2023
                 </option>
                 <option value="{{ url_for('srp22_playeroverview') }}"
@@ -27,10 +27,10 @@
             <select class="form-select"
                     id="page-select"
             >
-                <option value="{{ url_for('srp23_teamoverview') }}"
+                <option value="{{ url_for('srp24_teamoverview') }}"
                 >Team Overview
                 </option>
-                <option value="{{ url_for('srp23_playeroverview') }}"
+                <option value="{{ url_for('srp24_playeroverview') }}"
                         selected
                 >Player Overview
                 </option>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Back Row Sports — SRP 2023 — Player Season Overview{% endblock %}
+{% block title %}Back Row Sports — SRP 2023 — Team Season Overview{% endblock %}
 {% block content %}
     <div class="mb-5 d-flex flex-column gap-4 align-items-center">
         <div>
@@ -11,14 +11,14 @@
             <select class="form-select"
                     id="year-select"
             >
-                <option value="{{ url_for('srp24_playeroverview') }}"
+                <option value="{{ url_for('srp24_teamoverview') }}"
+                        selected
                 >2024
                 </option>
-                <option value="{{ url_for('srp23_playeroverview') }}"
-                        selected
+                <option value="{{ url_for('srp23_teamoverview') }}"
                 >2023
                 </option>
-                <option value="{{ url_for('srp22_playeroverview') }}"
+                <option value="{{ url_for('srp22_teamoverview') }}"
                 >2022
                 </option>
             </select>
@@ -27,35 +27,36 @@
             <select class="form-select"
                     id="page-select"
             >
-                <option value="{{ url_for('srp23_teamoverview') }}"
+                <option value="{{ url_for('srp24_teamoverview') }}"
+                        selected
                 >Team Overview
                 </option>
-                <option value="{{ url_for('srp23_playeroverview') }}"
-                        selected
+                <option value="{{ url_for('srp24_playeroverview') }}"
                 >Player Overview
                 </option>
             </select>
         </div>
     </div>
 
+
     <div class="table-container">
         <div class="static-table">
-            {{ top_tries|safe }}
+            {{ avg_cb|safe }}
         </div>
         <div class="static-table">
-            {{ top_defenders_beaten|safe }}
+            {{ avg_db|safe }}
         </div>
         <div class="static-table">
-            {{ top_clean_breaks|safe }}
+            {{ avg_runs|safe }}
         </div>
         <div class="static-table">
-            {{ top_tackles|safe }}
+            {{ avg_metres|safe }}
         </div>
         <div class="static-table">
-            {{ top_runs|safe }}
+            {{ avg_offl|safe }}
         </div>
         <div class="static-table">
-            {{ top_metres|safe }}
+            {{ avg_tkl|safe }}
         </div>
     </div>
 
@@ -69,8 +70,8 @@
     <script>
         $(document).ready(function () {
             $('.table:last').DataTable({
-                "pageLength": 15,
-                "lengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
+                "pageLength": 12,
+                "lengthMenu": [[12, 25, 50, -1], [12, 25, 50, "All"]],
                 "initComplete": function (settings, json) {
                     $(".table:last").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
@@ -79,5 +80,4 @@
     </script>
 
     <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
-
 {% endblock %}
